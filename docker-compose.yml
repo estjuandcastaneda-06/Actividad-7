@@ -1,0 +1,11 @@
+services:
+  twin:
+    build: ./sim
+    ports:
+      - "8000:8000"
+      - "4210:4210/udp"
+  emulator:
+    build: ./sim
+    command: python emulator.py --host twin
+    depends_on: [twin]
+    profiles: ["emulator"]
